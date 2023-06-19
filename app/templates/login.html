@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block page_title %}Paper Note - Login{% endblock %}
+
+{% block text_title %}Make your login:{% endblock %}
+
+{% block content %}
+{{ wtf.quick_form(form) }}
+<p class="forgot-password">Forgot your password? <a href="{{ url_for('auth.forgot_password')}}">Click here.</a></p>
+<p class="new-user">New User? <a href="{{ url_for('auth.register') }}">Click here.</a></p>
+{% endblock %}

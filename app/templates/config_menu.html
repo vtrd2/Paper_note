@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Paper Note - Config Menu{% endblock %}
+
+{% block text_title %}Configurations:{% endblock %}
+
+{% block content %}
+<div class="config_buttons">
+    <div class="config_button_base">
+        <a href="{{ url_for('config.dark_mode') }}" class='config_button'>{% if current_user.dark_mode %}Light{% else %}Dark{% endif %} mode</a>
+    </div>
+    <div class="config_button_base">
+        <a href="{{ url_for('config.change_password')}}" class='config_button'>Change password</a>
+    </div>
+    <div class="config_button_base">
+        <a href="{{ url_for('config.change_email')}}" class='config_button'>Change email</a>
+    </div>
+    <div class="data">
+        <p>Your current email: {{ current_user.email }}</p>
+    </div>
+</div>
+{% endblock %}

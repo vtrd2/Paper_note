@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block page_title %}Paper Note - Edit{% endblock %}
+
+{% block text_title %}Your Note{% endblock %}
+
+{% block content %}
+{{ wtf.quick_form(form) }}
+<a class='scratch-button' href="/scratch/{{note_id}}">{% if note_is_scratched %}Unscratch{% else %}Scratch{% endif %}</a>
+{% endblock %}

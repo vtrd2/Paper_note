@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block page_title %}Paper Note{% endblock %}
+
+{% block title %}{% endblock %}
+
+{% block base_content %}
+    <div class="paper-content">
+    {% for area in range(18) %} 
+    {% if notes[area] and current_user.is_authenticated %}
+        {% if notes[area].scratched %}
+        <a class='paper-area-button' href="/note/{{ notes[area].id }}"><div class="paper-area"id="paper-area-{{area}}" style="background: #A2A2A2;"><s>{{ notes[area].body }}</s></div></a>
+        {% else %} 
+        <a class='paper-area-button' href="/note/{{ notes[area].id }}"><div class="paper-area"id="paper-area-{{area}}">{{ notes[area].body }}</div></a>
+        {% endif %}
+    {% else %}
+    <a class='paper-area-button' href="{{ url_for('main.add_note') }}"><div class="paper-area"id="paper-area-{{area}}"></div></a>
+    {% endif %}
+    {% endfor %}   
+    </div>
+    <div class="action_buttons">
+        <div class="add_button">
+            <a class='add_button' href="{{ url_for('main.add_note') }}"><img class="add_button" src="{{ url_for('static', filename='add.svg') }}" alt="add note button"></a>
+        </div>
+        <div class="raise_button">
+            <a class='raise_button' href="{{ url_for('main.clear_notes') }}"><img class="add_button" src="{{ url_for('static', filename='apagador.svg') }}" alt="raise note button"></a>
+        </div>
+    </div>
+    
+{% endblock %}

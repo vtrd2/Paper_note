@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block page_title %}Paper Note - Unconfirmed{% endblock %}
+
+{% block text_title %}Confirm your email{% endblock %}
+
+{% block content %}
+<p>Please, confirm your email, we sent an email for you with the confirmation link, but if need another confirmation email, <a href="{{ url_for('auth.resend_confirmation') }}"> Click here.</a></p>
+
+{% endblock %}

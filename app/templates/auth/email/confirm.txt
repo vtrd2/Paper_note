@@ -1,0 +1,12 @@
+Hello,
+
+Welcome to Paper Note!
+
+To confirm your account please click on the following link:
+
+{{ url_for('auth.confirm', token=token, _external=True) }}
+
+Sincerly,
+The Paper Note Team
+
+Note: replies to this email address are not monitored.

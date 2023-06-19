@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"
+{% if current_user.dark_mode %}
+style="background: #515151;"
+{% endif %}>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block page_title %}Paper Note{% endblock %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='logo.svg') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    </head>
+    <script>
+        function hidde(id) {
+            document.getElementById(id).className = 'hidden'
+        }
+        setTimeout(function() {
+            $('.alert-warning').fadeOut('slow');
+        }, 3000); // <-- time in milliseconds
+    </script>
+</head>
+{% block body %}
+<body>
+    <div class="bar">
+    {% block bar %}  
+        <a href="/" class="logo-button"><img class="logo-image" src="{{ url_for('static', filename='logo.svg') }}" alt="Logo"></a>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('config.menu') }}" class='config-button'><img class="config-image" src="{{ url_for('static', filename='settings.svg') }}" alt="Settings"></a>
+        <a href='{{ url_for("auth.logout") }}' class="log-button">Log out</a>
+        {% else %} 
+        <a href='{{ url_for("auth.login") }}' class="log-button">Log in</a>
+        {% endif %}
+    {% endblock %}
+    </div>
+
+    <div class="alert">
+    {% for message in get_flashed_messages() %}
+        <div class='alert-warning' id='{{message[:4]}}'>
+            <p class="alert-content" id='{{message[:4]}}'>
+                <button type='button' class='close' data-dismiss='alert' onClick="hidde('{{message[:4]}}')">&times;</button>
+                {{message}}
+            </p>
+        </div>
+    {% endfor %}   
+    </div>
+
+    {% block title %}
+    <div class="title"><h1 class='page-title'>{% block text_title %}Page Title{% endblock %}</h1></div>
+    {% endblock %} 
+
+    {% block base_content %}
+    <div class="content">
+        {% block content %}
+        <p>conteudo</p>
+        {% endblock %}
+    </div>
+    {% endblock %}
+</body>
+{% endblock %}
+</html> 
